@@ -1,3 +1,8 @@
+<img width="2160" height="1260" alt="case_3_velocity_v_omega" src="https://github.com/user-attachments/assets/293424d7-58b1-4530-8158-ea425ae475a0" />
+<img width="2160" height="1440" alt="case_3_obstacle_replanning_timeline" src="https://github.com/user-attachments/assets/c024a739-70e9-4616-8e8c-d195cb3f1369" />
+<img width="2160" height="1860" alt="case_3_fig2_path_trajectory" src="https://github.com/user-attachments/assets/ff86e119-d07a-49bd-b69a-c08589c63757" />
+<img width="2170" height="1545" alt="diagram-state" src="https://github.com/user-attachments/assets/8571f468-af86-49d0-a621-6511d8fee952" />
+<img width="1280" height="720" alt="Slide2" src="https://github.com/user-attachments/assets/e32762c9-73a1-4d2c-a694-c9f874d4a35d" />
 
 
 https://github.com/user-attachments/assets/b83ed885-5c1a-417d-afca-50bc58720953
@@ -292,5 +297,9 @@ Add the project license here.
 ## Authors
 
 Labid Bin Bashar and Matthew Tran.
+
+## Acknowledgement 
+
+During the project, we used Chatgpt to plan, create a skeleton, troubleshoot and debug codes. 
 
 
