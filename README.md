@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/b83ed885-5c1a-417d-afca-50bc58720953
+
 # TurtleBot4 Tour Guide Mission
 
 This repository contains a ROS 2 package named `tour_guide` for running an adaptive TurtleBot4 tour-guide mission on a saved indoor map. The robot visits a set of predefined landmarks, plans paths using a custom A* planner, follows the planned path with a custom route executor, detects front obstacles using LiDAR, and requests replanning when the current route becomes blocked.
@@ -289,5 +293,4 @@ Add the project license here.
 
 Labid Bin Bashar and Matthew Tran.
 
-## Video
 
