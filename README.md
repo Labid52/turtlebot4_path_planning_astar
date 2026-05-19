@@ -287,4 +287,7 @@ Add the project license here.
 
 ## Authors
 
-Add author names and contact information here.
+Labid Bin Bashar and Matthew Tran.
+
+## Video
+
