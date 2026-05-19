@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<!--
+  tour_world.sdf — 10 m x 8 m rectangular room with 5 coloured landmark boxes.
+
+  Room outer dimensions: x = [0, 10],  y = [0, 8]  (wall outer edges, world frame)
+  Wall thickness: 0.15 m,  Wall height: 2.0 m
+
+  Robot spawns at world(1.0, 1.0) — see launch file.
+  With SLAM Toolbox the map frame origin ≈ robot spawn position, so:
+    map_coord  ≈  world_coord  –  (1.0, 1.0)
+
+  Landmarks (coloured 0.4 × 0.4 × 0.8 m boxes):
+    Library    blue   world(2.0, 6.5)  →  map(1.0, 5.5)
+    Cafeteria  red    world(5.0, 6.5)  →  map(4.0, 5.5)
+    Lab        green  world(8.5, 6.5)  →  map(7.5, 5.5)
+    Office     yellow world(8.5, 1.5)  →  map(7.5, 0.5)
+    Reception  purple world(5.0, 3.5)  →  map(4.0, 2.5)
+-->
+<sdf version="1.8">
+  <world name="tour_world">
+
+    <!-- ── Simulation physics ────────────────────────────────────────── -->
+    <physics name="1ms" type="ode">
+      <max_step_size>0.003</max_step_size>
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- ── Required Gazebo Harmonic plugins ──────────────────────────── -->
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system"
+            name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+            name="gz::sim::systems::Imu"/>
+
+    <!-- ── Lighting ──────────────────────────────────────────────────── -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- ── Ground plane ──────────────────────────────────────────────── -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>50 50</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>50 50</size></plane></geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================================================================
+         ROOM WALLS
+         Centre of south wall: (5.00, 0.075, 1.0)  size 10.15 × 0.15 × 2.0
+         Centre of north wall: (5.00, 7.925, 1.0)  size 10.15 × 0.15 × 2.0
+         Centre of west  wall: (0.075, 4.00, 1.0)  size 0.15 × 8.0   × 2.0
+         Centre of east  wall: (9.925, 4.00, 1.0)  size 0.15 × 8.0   × 2.0
+         ================================================================ -->
+
+    <model name="wall_south">
+      <static>true</static>
+      <pose>5.00 0.075 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>10.15 0.15 2.0</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>10.15 0.15 2.0</size></box></geometry>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_north">
+      <static>true</static>
+      <pose>5.00 7.925 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>10.15 0.15 2.0</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>10.15 0.15 2.0</size></box></geometry>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <pose>0.075 4.00 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.15 8.00 2.0</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.15 8.00 2.0</size></box></geometry>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <pose>9.925 4.00 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.15 8.00 2.0</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.15 8.00 2.0</size></box></geometry>
+          <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================================================================
+         LANDMARK BOXES  — 0.4 × 0.4 × 0.8 m
+         pose z = 0.4  (box centre is at half-height above ground)
+         ================================================================ -->
+
+    <!-- Library — BLUE   world(2.0, 6.5)  map≈(1.0, 5.5) -->
+    <model name="landmark_library">
+      <static>true</static>
+      <pose>2.0 6.5 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.8</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.4 0.4 0.8</size></box></geometry>
+          <material>
+            <ambient>0.10 0.25 0.90 1</ambient>
+            <diffuse>0.10 0.25 0.90 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Cafeteria — RED   world(5.0, 6.5)  map≈(4.0, 5.5) -->
+    <model name="landmark_cafeteria">
+      <static>true</static>
+      <pose>5.0 6.5 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.8</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.4 0.4 0.8</size></box></geometry>
+          <material>
+            <ambient>0.90 0.10 0.10 1</ambient>
+            <diffuse>0.90 0.10 0.10 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Lab — GREEN   world(8.5, 6.5)  map≈(7.5, 5.5) -->
+    <model name="landmark_lab">
+      <static>true</static>
+      <pose>8.5 6.5 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.8</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.4 0.4 0.8</size></box></geometry>
+          <material>
+            <ambient>0.10 0.85 0.10 1</ambient>
+            <diffuse>0.10 0.85 0.10 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Office — YELLOW   world(8.5, 1.5)  map≈(7.5, 0.5) -->
+    <model name="landmark_office">
+      <static>true</static>
+      <pose>8.5 1.5 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.8</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.4 0.4 0.8</size></box></geometry>
+          <material>
+            <ambient>0.95 0.90 0.05 1</ambient>
+            <diffuse>0.95 0.90 0.05 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Reception — PURPLE   world(5.0, 3.5)  map≈(4.0, 2.5) -->
+    <model name="landmark_reception">
+      <static>true</static>
+      <pose>5.0 3.5 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.8</size></box></geometry></collision>
+        <visual   name="vis"><geometry><box><size>0.4 0.4 0.8</size></box></geometry>
+          <material>
+            <ambient>0.70 0.10 0.70 1</ambient>
+            <diffuse>0.70 0.10 0.70 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
