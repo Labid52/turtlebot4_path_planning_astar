@@ -290,11 +290,8 @@ Tune the arrival and execution parameters in `config.py` and `route_executor_nod
 - `ANG_SPEED`
 - `K_HEADING`
 
-## License
 
-Add the project license here.
-
-## Authors
+## Collaborators
 
 Labid Bin Bashar and Matthew Tran.
 
